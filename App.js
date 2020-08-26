@@ -4,6 +4,8 @@ import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import ReadStoryScreen from './screens/ReadStoryScreen';
 import WriteStoryScreen from './screens/WriteStoryScreen';
+import { ImageBackground } from 'react-native';
+import { setStatusBarBackgroundColor } from 'expo-status-bar';
 
 export default class App extends React.Component {
   render() {
@@ -25,14 +27,14 @@ const TabNavigator = createBottomTabNavigator({
           return (
             <Image
               source={require('./assets/read.png')}
-              style={{ width: 40, height: 40 }}
+              style={{ width: 25, height: 25 }}
             />
           );
         } else if (routeName === 'WriteStory') {
           return (
             <Image
               source={require('./assets/write.png')}
-              style={{ width: 40, height: 40 }}
+              style={{ width: 25, height: 25 }}
             />
           );
         }

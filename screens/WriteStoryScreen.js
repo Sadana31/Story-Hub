@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, ToastAndroid, TextInput, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import { Text, ToastAndroid, TextInput, StyleSheet, KeyboardAvoidingView, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import db from "../config";
@@ -17,20 +17,33 @@ export default class WriteStoryScreen extends React.Component {
   }
 
   submitStory=()=>{
-    db.collection("Stories").add({
-      "Title of the Story": this.state.title,
-      "Author of the Story": this.state.author,
-      "Story": this.state.story,
-    })
-    this.setState({
-      title: "",
-      author: "",
-      story: "",
-    })
+    if(this.state.title.trim()===""){
+      alert("Please enter a title");
+     this.setState({author: "Not available"});
+    }
+    else if(this.state.story.trim()===""){
+      alert("Please type in your story!");
+    }
+    else if(this.state.title.trim()==="" && this.state.story.trim()===""){
+      alert("Please enter a title and type in your story!");
+     this.setState({author: "Not available"});
+    }
+    else {
+      db.collection("Stories").add({
+        "TitleoftheStory": this.state.title,
+        "AuthoroftheStory": this.state.author,
+        "Story": this.state.story,
+      })
+      this.setState({
+        title: "",
+        author: "",
+        story: "",
+      })
+    }
   }
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <KeyboardAvoidingView style={styles.container} behavior="margin" enabled>
         <Header
           backgroundColor={'#DF3A01'}
           centerComponent={{
@@ -79,7 +92,7 @@ export default class WriteStoryScreen extends React.Component {
 const styles = StyleSheet.create({
   submitButton: {
     backgroundColor: '#DF3A01',
-    marginTop: 20,
+    marginTop: 15,
     width: 150,
     height: 50,
     borderWidth: 1.5,
@@ -101,11 +114,11 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   inputBox: {
-    width: 350,
-    height: 70,
+    width: '80%',
+    height: '10%',
     borderWidth: 2,
     fontSize: 20,
-    marginTop: 20,
+    marginTop: 15,
     textAlign: 'center',
     backgroundColor: 'white',
     fontWeight: 'bold',
@@ -113,11 +126,11 @@ const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: 'white',
-    marginTop: 30,
-    width: 350,
+    marginTop: 20,
+    width: '80%',
     fontWeight: 'bold',
     color: '#DF3A01',
-    height: 350,
+    height: "50%",
     borderWidth: 2,
     textAlign: 'center',
     fontSize: 20,
