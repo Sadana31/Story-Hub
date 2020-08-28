@@ -6,7 +6,6 @@ import db from "../config";
 import firebase from 'firebase';
 
 export default class WriteStoryScreen extends React.Component {
-
   constructor(){
     super();
     this.state = {
@@ -79,9 +78,10 @@ export default class WriteStoryScreen extends React.Component {
           value={this.state.story}></TextInput>
 
         <TouchableOpacity style={styles.submitButton} onPress={()=>{
-          this.submitStory()
+          this.submitStory();
           ToastAndroid.show("Yay!! Your story has been submitted!",ToastAndroid.SHORT,ToastAndroid.CENTER);
         }}>
+          
           <Text style={styles.buttonText}>SUBMIT</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
